@@ -1,0 +1,47 @@
+{{#extends 'base'}}
+
+{{#block "content"}}
+<h2>Order Details</h2>
+<section>
+    <p>Restaurant: {{restaurant.name}}</p>
+</section>
+<table class="table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Description</th>
+            <th>category</th>
+            <th>price</th>
+            <th>status</th>
+        </tr>
+    </thead>
+    <tbody>
+        {{#each menuItems}}
+        <tr>
+            <td>{{this.id}}</td>
+            <td>{{this.name}}</td>
+            <td>{{this.description}}</td>
+            <td>{{this.category}}</td>
+            <td>{{this.price}}</td>
+            {{#if this.status}}
+            <td>Enable</td>
+            {{else}}
+            <td>Disable</td>
+            {{/if}}
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
+<div class="mt-2 alert alert-danger">
+    Are you sure you want to place order?
+    <div>
+        <form method="POST">
+            <button class="btn btn-danger">Yes</button>
+            <a href="/restaurants/{{restaurant.id}}/detail" class="btn btn-success">No</a>
+        </form>
+    </div>
+</div>
+{{/block}}
+
+{{/extends}}

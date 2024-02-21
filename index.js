@@ -4,6 +4,8 @@ const dotenv = require('dotenv');
 const hbs = require('hbs');
 const wax = require('wax-on');
 const dbtool = require('./dbtool.js')
+const restaurantsRoutes = require("./routes/restaurants.js")
+const ordersRoutes = require("./routes/orders.js")
 
 dotenv.config();
 
@@ -26,6 +28,11 @@ async function main() {
     //     password: process.env.DB_PASSWORD
     // });
     await dbtool.connect();
+    app.get('/', (req, res) => {
+        res.render('index.hbs')
+    })
+    app.use('/restaurants', restaurantsRoutes)
+    app.use('/orders', ordersRoutes)
 }
 main();
 

@@ -1,0 +1,34 @@
+{{#extends 'base'}}
+
+{{#block "content"}}
+<h2>Order List</h2>
+<table class="table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Restaurant Name</th>
+            <th>Create At</th>
+            <th>Total</th>
+            <th>Status</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        {{#each orders}}
+        <tr>
+            <td>{{this.id}}</td>
+            <td><a href="/orders/{{this.id}}">{{this.name}}</a></td>
+            <td>{{this.createAt}}</td>
+            <td>{{this.total}}</td>
+            <td>{{this.status}}</td>
+            <td>
+                <a class="btn btn-danger btn-sm" href="/orders/{{this.id}}/delete">Delete</a>
+            </td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
+
+{{/block}}
+
+{{/extends}}

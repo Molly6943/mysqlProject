@@ -1,0 +1,50 @@
+{{#extends 'base'}}
+
+{{#block "content"}}
+<h2>Restaurant Details</h2>
+<section>
+    <p>name: {{restaurant.name}}</p>
+    <p>description: {{restaurant.description}}</p>
+    <p>location: {{restaurant.location}}</p>
+    <p>contact: {{restaurant.contact}}</p>
+</section>
+<table class="table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Description</th>
+            <th>category</th>
+            <th>price</th>
+            <th>status</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        {{#each menuItems}}
+        <tr>
+            <td>{{this.id}}</td>
+            <td>{{this.name}}</td>
+            <td>{{this.description}}</td>
+            <td>{{this.category}}</td>
+            <td>{{this.price}}</td>
+            {{#if this.status}}
+            <td>Enable</td>
+            {{else}}
+            <td>Disable</td>
+            {{/if}}
+            <td>
+                {{#if this.status}}
+                <a class="btn btn-primary btn-sm" href="/restaurants/{{../restaurant.id}}/menu/{{this.id}}/order">Place order</a>
+                {{/if}}
+                <a class="btn btn-danger btn-sm" href="/restaurants/{{../restaurant.id}}/menu/{{this.id}}/delete">Delete</a>
+                <a class="btn btn-success btn-sm" href="/restaurants/{{../restaurant.id}}/menu/{{this.id}}/update">Update</a>
+            </td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
+
+{{/block}}
+
+{{/extends}}

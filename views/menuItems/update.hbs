@@ -1,0 +1,34 @@
+{{#extends "base"}}
+{{#block "content"}}
+<h2>Menu Item Form</h2>
+<p>Update Menu Item for <b>{{menuItem.name}}</b></p>
+<form method="post"> <!-- Replace /your-endpoint with your form submission endpoint -->
+    <div class="mb-3">
+        <label for="name" class="form-label">Item Name</label>
+        <input type="text" class="form-control" id="name" name="name" value="{{menuItem.name}}" required>
+    </div>
+    <div class="mb-3">
+        <label for="description" class="form-label">Description</label>
+        <input type="text" class="form-control" id="description" name="description" value="{{menuItem.description}}">
+    </div>
+    <div class="mb-3">
+        <label for="category" class="form-label">Category</label>
+        <input type="text" class="form-control" id="category" name="category" value="{{menuItem.category}}" required>
+    </div>
+    <div class="mb-3">
+        <label for="price" class="form-label">Price</label>
+        <input type="number" class="form-control" id="price" name="price" value="{{menuItem.price}}" required>
+    </div>
+    <div class="mb-3">
+        <label for="status" class="form-label">Status</label>
+        <select class="form-control" id="status" name="status">
+            <option value="1" 
+            {{#if menuItem.status}} selected {{/if}}
+            >Enable</option>
+            <option {{#if menuItem.status}} {{else}} selected {{/if}} value="0">Disable</option>
+        </select>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+{{/block}}
+{{/extends}}

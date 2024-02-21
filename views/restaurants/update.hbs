@@ -1,0 +1,25 @@
+{{#extends "base"}}
+{{#block "content"}}
+<h2>Restaurant Form</h2>
+<form method="post"> <!-- Replace /your-endpoint with your form submission endpoint -->
+    <div class="mb-3">
+        <label for="name" class="form-label">Restaurant Name</label>
+        <input type="text" class="form-control" id="name" name="name" value="{{restaurant.name}}" required>
+    </div>
+    <div class="mb-3">
+        <label for="description" class="form-label">Description</label>
+        <input type="text" class="form-control" id="description" name="description" value="{{restaurant.description}}">
+    </div>
+    <div class="mb-3">
+        <label for="location" class="form-label">Location</label>
+        <input type="text" class="form-control" id="location" name="location" value="{{restaurant.location}}" required>
+    </div>
+    <div class="mb-3">
+        <label for="contact" class="form-label">Contact</label>
+        <input type="text" class="form-control" id="contact" name="contact" value="{{restaurant.contact}}" required>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+{{/block}}
+{{/extends}}

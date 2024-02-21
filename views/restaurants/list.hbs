@@ -1,0 +1,46 @@
+{{#extends 'base'}}
+
+{{#block "content"}}
+<h2>Restaurant List</h2>
+<form action="/restaurants/search" method="GET" class="row mb-4 mt-3">
+    <div class="col-10">
+        <input placeholder="Type in name or location to search..." type="text" name="searchTerms" class="form-control" />
+    </div>
+    <div class="col-2">
+        <input type="submit" class="btn btn-primary ms-2" value="Search" />
+    </div>
+</form>
+<a href="/restaurants/create" class="btn btn-primary mb-3">New Restaurant</a>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Location</th>
+            <th>Contact</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        {{#each restaurants}}
+        <tr>
+            <td>{{this.id}}</td>
+            <td><a href="/restaurants/{{this.id}}/detail">{{this.name}}</a></td>
+            <td>{{this.description}}</td>
+            <td>{{this.location}}</td>
+            <td>{{this.contact}}</td>
+            <td>
+                <a class="btn btn-primary btn-sm" href="/restaurants/{{this.id}}/menu/create">Create Menu Item</a>
+                <a class="btn btn-danger btn-sm" href="/restaurants/{{this.id}}/delete">Delete</a>
+                <a class="btn btn-success btn-sm" href="/restaurants/{{this.id}}/update">Update</a>
+            </td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
+
+{{/block}}
+
+{{/extends}}

@@ -1,26 +1,36 @@
 {{#extends 'base'}}
 
 {{#block "content"}}
-<h2>Employee List</h2>
+<h2>Order Details</h2>
+<section>
+    <p>ID: {{order.id}}</p>
+    <p>Restaurant Name: {{order.name}}</p>
+    <p>CreateAt: {{order.createAt}}</p>
+    <p>status: {{order.status}}</p>
+    <p>Total: {{order.total}}</p>
+</section>
 <table class="table">
     <thead>
         <tr>
             <th>ID</th>
             <th>Name</th>
             <th>Description</th>
+            <th>category</th>
+            <th>price</th>
         </tr>
     </thead>
     <tbody>
-        {{#each restaurants}}
+        {{#each orderItems}}
         <tr>
             <td>{{this.id}}</td>
             <td>{{this.name}}</td>
             <td>{{this.description}}</td>
+            <td>{{this.category}}</td>
+            <td>{{this.price}}</td>
         </tr>
         {{/each}}
     </tbody>
 </table>
-
 {{/block}}
 
 {{/extends}}
