@@ -67,8 +67,16 @@ router.get('/:id/delete', async function (req, res) {
 
 router.post('/:id/delete', async function (req, res) {
     const query = "DELETE FROM restaurants WHERE id = ?";
-    await dbtool.pool.execute(query, [req.params.id]);
-    res.redirect('/restaurants');
+    const [orders] = await dbtool.pool.execute({sql: 'select * from orders where restaurant_id = ?'}, [req.params.id])
+    const [menuItems] = await dbtool.pool.execute({sql: 'select * from menu_items where restaurant_id = ?'}, [req.params.id])
+    if (orders.length > 0 || menuItems.length > 0) {
+        res.render('deleteNotice')
+        return
+    } else {
+        await dbtool.pool.execute(query, [req.params.id]);
+        res.redirect('/restaurants');
+    }
+    // return
 });
 
 // update
@@ -135,7 +143,7 @@ router.get('/:restaurant_id/menu/:menu_item_id/delete', async function (req, res
 router.post('/:restaurant_id/menu/:menu_item_id/delete', async function (req, res) {
     const query = "DELETE FROM menu_items WHERE id = ?";
     await dbtool.pool.execute(query, [req.params.menu_item_id]);
-    res.redirect(`/restaurants/${req.params.restaurant_id}`);
+    res.redirect(`/restaurants/${req.params.restaurant_id}/detail`);
 });
 
 // update
@@ -163,7 +171,7 @@ router.post('/:restaurant_id/menu/:menu_item_id/update', async function (req, re
     `;
     const bindings = [name, description, parseInt(price), category, parseInt(status), req.params.menu_item_id];
     await dbtool.pool.execute(query, bindings);
-    res.redirect(`/restaurants/${req.params.restaurant_id}`);
+    res.redirect(`/restaurants/${req.params.restaurant_id}/detail`);
 })
 
 // order

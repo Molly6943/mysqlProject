@@ -48,6 +48,12 @@ router.get('/:id/delete', async function (req, res) {
 });
 
 router.post('/:id/delete', async function (req, res) {
+    const [orderItems] = await dbtool.pool.execute({sql: 'select * from order_items where order_id = ?'}, [req.params.id]);
+    if (orderItems.length > 0) {
+        for (let o of orderItems) {
+            await dbtool.pool.execute("DELETE FROM order_items WHERE id = ?", [o.id])
+        }
+    }
     const query = "DELETE FROM orders WHERE id = ?";
     await dbtool.pool.execute(query, [req.params.id]);
     res.redirect('/orders');
